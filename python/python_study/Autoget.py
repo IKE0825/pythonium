@@ -5,6 +5,7 @@ import requests
 import time
 import pandas as pd
 from pandas import Series, DataFrame
+import pdb
 
 #URL（ここにURLを入れてください）
 url = 'https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=050&bs=040&ta=23&sc=23109&cb=0.0&ct=9999999&et=9999999&cn=9999999&mb=0&mt=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&srch_navi=1'
@@ -18,20 +19,29 @@ summary = soup.find("div",{'id':'js-bukkenList'})
 body = soup.find("body")
 pages = body.find_all("div",{'class':'pagination pagination_set-nav'})
 pages_text = str(pages)
+print(pages_text)
 pages_split = pages_text.split('</a></li>\n</ol>')
 pages_split0 = pages_split[0]
 pages_split1 = pages_split0[-3:]
 pages_split2 = pages_split1.replace('>','')
 pages_split3 = int(pages_split2)
 
+print(pages_split0)
+print(pages_split1)
+print(pages_split2)
+print(pages_split3)
+
 urls = []
 
+pdb.set_trace()
 urls.append(url)
 
 for i in range(pages_split3-1):
     pg = str(i+2)
     url_page = url + '&page=' + pg
     urls.append(url_page)
+    print(urls)
+# 各ページのurlをurlsリストに格納
 
 names = [] 
 addresses = [] 
@@ -48,12 +58,13 @@ floor_plans = []
 areas = []
 detail_urls = [] 
 
-for url in urls:
+for url in urls:  # 一覧ページを遷移しながらクローリング
     result = requests.get(url)
     c = result.content
     soup = BeautifulSoup(c)
     summary = soup.find("div",{'id':'js-bukkenList'})
     apartments = summary.find_all("div",{'class':'cassetteitem'})
+    pirnt(apartments)
 
     for apartment in apartments:
 
