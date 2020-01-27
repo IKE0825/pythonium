@@ -1,26 +1,39 @@
-import requests
-from bs4 import BeautifulSoup as bs4
+import sys
 import pdb
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import csv
+from bs4 import BeautifulSoup
+import requests
 
-url = "https://docs.python.org/ja/3/library/index.html"
+#ChromeをHeadlessモードで起動
+#options = Options()
+#options.add_argument('--headless')
 
-res = requests.get(url)
-soup = bs4(res.content,"html.parser")
+#Chromeのパスを指定
+#　※Chromedriverが無いとseleniumuは動かない
+#　下記パスにあるchromedriver.exeをディレクトリごとコピー
 
-uls = soup.find_all(class_ = "toctree-l2")
+res = requests.get("https://docs.python.org/ja/3/library/index.html")
+soup = BeautifulSoup(res.content,"html.parser")
+
 links = soup.find_all(class_ = "reference internal")
 
-lst_uls = []
-lst_link = []
+path = r"C:\python\chromedriver\chromedriver.exe"
 
-for ul in uls:
-    #print(ul.text)
-    lst_uls.append(ul.text)
+browser = webdriver.Chrome(path)
+browser.get("https://docs.python.org/ja/3/library/index.html")
 
-for link in links:
-    url = link.get("href")
-    lst_link.append(url)
+urls = []
 
-#print(lst_uls)
+time.sleep(1)
 
-print(lst_link)
+pdb.set_trace()
+
+element = browser.find_elements_by_class_name("toctree-wrapper compound")
+print(element)
+aTag = element.find_elements_by_tag_name("a")
+url  = aTag.get_attribute("href")
+
+print(url)

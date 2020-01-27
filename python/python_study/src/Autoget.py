@@ -64,7 +64,7 @@ for url in urls:  # 一覧ページを遷移しながらクローリング
     soup = BeautifulSoup(c)
     summary = soup.find("div",{'id':'js-bukkenList'})
     apartments = summary.find_all("div",{'class':'cassetteitem'})
-    pirnt(apartments)
+    print(apartments)
 
     for apartment in apartments:
 
