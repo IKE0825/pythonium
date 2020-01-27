@@ -23,8 +23,12 @@ linkText = links[2].text
 print(linkText)
 
 path = r"C:\python\chromedriver\chromedriver.exe"
+#linuxの場合はpath指定不要
+#binファイル内にchromedriverを格納 "sudo mv chromedriver /usr/local/bin"
+#おまじない "sudo chown root:root /usr/local/bin/chromedriver"
 
-browser = webdriver.Chrome(path)
+#indowsの場合、pathを指定
+browser = webdriver.Chrome()
 browser.get("https://docs.python.org/ja/3/library/index.html")
 
 urls = []
