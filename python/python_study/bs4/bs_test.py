@@ -1,12 +1,18 @@
 import requests
 from bs4 import BeautifulSoup as bs4
+import pdb
 
-url = "https://used.dospara.co.jp/sale/search.php?view=1&br=11&cbr=1102&page=1"
+url = "https://docs.python.org/ja/3/library/index.html"
 
 res = requests.get(url)
-soup = bs4(res.text)
+soup = bs4(res.content,"html.parser")
 
-dls = soup.find_all("dl")
+uls = soup.find_all("ul")
 
-for dl in dls:
-    print(dl.text)
+lst_uls = []
+
+for ul in uls:
+    #print(ul.text)
+    lst_uls.append(ul.text)
+
+print(lst_uls)
