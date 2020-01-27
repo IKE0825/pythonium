@@ -1,0 +1,17 @@
+#getRecord_button {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-left: solid 4px #668ad8;
+  border-right: solid 4px #668ad8;
+  color: #668ad8;
+  background: #e1f3ff;
+  transition: .4s;
+}
+
+#getRecord_button:hover {
+  background: #668ad8;
+  color: #FFF;
+}
