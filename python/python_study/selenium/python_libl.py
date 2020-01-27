@@ -19,6 +19,8 @@ res = requests.get("https://docs.python.org/ja/3/library/index.html")
 soup = BeautifulSoup(res.content,"html.parser")
 
 links = soup.find_all(class_ = "reference internal")
+linkText = links[2].text
+print(linkText)
 
 path = r"C:\python\chromedriver\chromedriver.exe"
 
@@ -31,9 +33,5 @@ time.sleep(1)
 
 pdb.set_trace()
 
-element = browser.find_elements_by_class_name("toctree-wrapper compound")
+element = browser.find_elements_by_link_text(linkText)
 print(element)
-aTag = element.find_elements_by_tag_name("a")
-url  = aTag.get_attribute("href")
-
-print(url)
